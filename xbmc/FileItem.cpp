@@ -134,8 +134,8 @@ CFileItem::CFileItem(const CEpgInfoTagPtr& tag)
   m_epgInfoTag = tag;
   m_strPath = tag->Path();
 
-  std::string strLabel("");
-  std::string strTitleEpisodeName("");
+  std::string strLabel;
+  std::string strTitleEpisodeName;
   //Title and Episode
   if (tag->EpisodeName().empty())
     strTitleEpisodeName = tag->Title();
@@ -226,8 +226,8 @@ CFileItem::CFileItem(const CPVRRecordingPtr& record)
   m_pvrRecordingInfoTag = record;
   m_strPath = record->m_strFileNameAndPath;
 
-  std::string strLabel("");
-  std::string strTitleEpisodeName("");
+  std::string strLabel;
+  std::string strTitleEpisodeName;
   //Title and Episode
   if (record->EpisodeName().empty())
     strTitleEpisodeName = record->m_strTitle;
@@ -267,7 +267,7 @@ CFileItem::CFileItem(const CPVRTimerInfoTagPtr& timer)
   m_pvrTimerInfoTag = timer;
   m_strPath = timer->Path();
 
-  std::string strLabel("");
+  std::string strLabel;
   const CEpgInfoTagPtr tag(timer->GetEpgInfoTag());
   if (tag)
   {
