@@ -52,10 +52,7 @@ CXBTFWriter::~CXBTFWriter()
 bool CXBTFWriter::Create()
 {
   m_file = fopen(m_outputFile.c_str(), "wb");
-  if (m_file == nullptr)
-    return false;
-
-  return true;
+  return m_file != nullptr;
 }
 
 bool CXBTFWriter::Close()

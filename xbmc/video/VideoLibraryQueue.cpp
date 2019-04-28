@@ -58,10 +58,7 @@ bool CVideoLibraryQueue::IsScanningLibrary() const
 
   // check if the library is being cleaned asynchronously
   VideoLibraryJobMap::const_iterator cleaningJobs = m_jobs.find("VideoLibraryCleaningJob");
-  if (cleaningJobs != m_jobs.end() && !cleaningJobs->second.empty())
-    return true;
-
-  return false;
+  return cleaningJobs != m_jobs.end() && !cleaningJobs->second.empty();
 }
 
 void CVideoLibraryQueue::StopLibraryScanning()

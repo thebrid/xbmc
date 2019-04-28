@@ -151,7 +151,7 @@ DemuxPacket* CDVDDemuxVobsub::Read()
       return NULL;
 
     current =  m_Timestamp++;
-  } while(m_Streams[current->id]->m_discard == true);
+  } while(m_Streams[current->id]->m_discard);
 
   if(!m_Demuxer->SeekByte(current->pos))
     return NULL;

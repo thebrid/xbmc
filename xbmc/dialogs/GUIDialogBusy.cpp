@@ -62,11 +62,7 @@ bool CGUIDialogBusy::Wait(IRunnable *runnable, unsigned int displaytime, bool al
   if (!runnable)
     return false;
   CBusyWaiter waiter(runnable);
-  if (!waiter.Wait(displaytime, allowCancel))
-  {
-    return false;
-  }
-  return true;
+  return waiter.Wait(displaytime, allowCancel);
 }
 
 bool CGUIDialogBusy::WaitOnEvent(CEvent &event, unsigned int displaytime /* = 100 */, bool allowCancel /* = true */)

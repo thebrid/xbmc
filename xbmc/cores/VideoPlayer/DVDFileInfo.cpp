@@ -65,10 +65,7 @@ bool CDVDFileInfo::GetFileDuration(const std::string &path, int& duration)
     return false;
 
   duration = demux->GetStreamLength();
-  if (duration > 0)
-    return true;
-  else
-    return false;
+  return duration > 0;
 }
 
 int DegreeToOrientation(int degrees)

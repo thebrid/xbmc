@@ -424,9 +424,9 @@ static int PlayMedia(const std::vector<std::string>& params)
   if (!item.m_bIsFolder && item.IsPlugin())
     item.SetProperty("IsPlayable", true);
 
-  if ( askToResume == true )
+  if ( askToResume )
   {
-    if ( CGUIWindowVideoBase::ShowResumeMenu(item) == false )
+    if ( !CGUIWindowVideoBase::ShowResumeMenu(item) )
       return false;
   }
   if (item.m_bIsFolder || item.IsPlayList() || item.IsSmartPlayList())

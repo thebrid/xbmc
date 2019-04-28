@@ -387,10 +387,7 @@ void CVideoSurfaces::ClearRender(VdpVideoSurface surf)
 bool CVideoSurfaces::IsValid(VdpVideoSurface surf)
 {
   CSingleLock lock(m_section);
-  if (m_state.find(surf) != m_state.end())
-    return true;
-  else
-    return false;
+  return m_state.find(surf) != m_state.end();
 }
 
 VdpVideoSurface CVideoSurfaces::GetFree(VdpVideoSurface surf)
@@ -631,7 +628,7 @@ long CDecoder::Release()
 
   // check if we should do some pre-cleanup here
   // a second decoder might need resources
-  if (m_vdpauConfigured == true)
+  if (m_vdpauConfigured)
   {
     CSingleLock lock(m_DecoderSection);
     CLog::Log(LOGNOTICE,"CVDPAU::Release pre-cleanup");
@@ -641,7 +638,7 @@ long CDecoder::Release()
                                                    &reply,
                                                    2000))
     {
-      bool success = reply->signal == COutputControlProtocol::ACC ? true : false;
+      bool success = reply->signal == COutputControlProtocol::ACC;
       reply->Release();
       if (!success)
       {
@@ -781,10 +778,7 @@ CDVDVideoCodec::VCReturn CDecoder::Check(AVCodecContext* avctx)
 
 bool CDecoder::IsVDPAUFormat(AVPixelFormat format)
 {
-  if (format == AV_PIX_FMT_VDPAU)
-    return true;
-  else
-    return false;
+  return format == AV_PIX_FMT_VDPAU;
 }
 
 bool CDecoder::Supports(VdpVideoMixerFeature feature)
@@ -921,7 +915,7 @@ bool CDecoder::ConfigVDPAU(AVCodecContext* avctx, int ref_frames)
                                                  &m_vdpauConfig,
                                                  sizeof(m_vdpauConfig)))
   {
-    bool success = reply->signal == COutputControlProtocol::ACC ? true : false;
+    bool success = reply->signal == COutputControlProtocol::ACC;
     reply->Release();
     if (!success)
     {
@@ -1045,7 +1039,7 @@ int CDecoder::Render(struct AVCodecContext *s, struct AVFrame *src,
     max_refs = s->refs;
 
   if(vdp->m_vdpauConfig.vdpDecoder == VDP_INVALID_HANDLE
-  || vdp->m_vdpauConfigured == false
+  || !vdp->m_vdpauConfigured
   || vdp->m_vdpauConfig.maxReferences < max_refs)
   {
     if(!vdp->ConfigVDPAU(s, max_refs))
@@ -1226,7 +1220,7 @@ void CDecoder::Reset()
                                                  &reply,
                                                  2000))
   {
-    bool success = reply->signal == COutputControlProtocol::ACC ? true : false;
+    bool success = reply->signal == COutputControlProtocol::ACC;
     reply->Release();
     if (!success)
     {
@@ -3181,9 +3175,7 @@ void COutput::Flush()
 
 bool COutput::HasWork()
 {
-  if (!m_bufferPool->processedPics.empty() && m_bufferPool->HasFree())
-    return true;
-  return false;
+  return !m_bufferPool->processedPics.empty() && m_bufferPool->HasFree();
 }
 
 CVdpauRenderPicture* COutput::ProcessMixerPicture()

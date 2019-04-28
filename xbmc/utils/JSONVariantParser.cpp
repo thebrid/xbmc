@@ -203,10 +203,7 @@ bool CJSONVariantParser::Parse(const char* json, CVariant& data)
   rapidjson::StringStream stringStream(json);
 
   CJSONVariantParserHandler handler(data);
-  if (reader.Parse(stringStream, handler))
-    return true;
-
-  return false;
+  return reader.Parse(stringStream, handler);
 }
 
 bool CJSONVariantParser::Parse(const std::string& json, CVariant& data)

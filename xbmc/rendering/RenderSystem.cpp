@@ -34,10 +34,7 @@ void CRenderSystemBase::GetRenderVersion(unsigned int& major, unsigned int& mino
 
 bool CRenderSystemBase::SupportsNPOT(bool dxt) const
 {
-  if (dxt)
-    return false;
-
-  return true;
+  return !dxt;
 }
 
 bool CRenderSystemBase::SupportsStereo(RENDER_STEREO_MODE mode) const

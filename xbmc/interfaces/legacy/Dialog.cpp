@@ -415,7 +415,7 @@ namespace XBMCAddon
             bool bResult = false;
 
             if (option & PASSWORD_VERIFY)
-              bResult = CGUIKeyboardFactory::ShowAndVerifyPassword(value, heading, 0, autoclose) == 0 ? true : false;
+              bResult = CGUIKeyboardFactory::ShowAndVerifyPassword(value, heading, 0, autoclose) == 0;
             else
               bResult = CGUIKeyboardFactory::ShowAndVerifyNewPassword(value, heading, true, autoclose);
 

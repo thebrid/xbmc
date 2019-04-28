@@ -62,10 +62,7 @@ bool CDVDVideoPPFFmpeg::CheckInit(int iWidth, int iHeight)
     m_pMode = pp_get_mode_by_name_and_quality(m_sType.c_str(), PP_QUALITY_MAX);
   }
 
-  if (m_pMode)
-    return true;
-  else
-    return false;
+  return m_pMode != nullptr;
 }
 
 void CDVDVideoPPFFmpeg::SetType(const std::string& mType, bool deinterlace)

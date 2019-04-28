@@ -979,10 +979,7 @@ bool CSettingInt::fromString(const std::string &strValue, int &value)
 
   char *end = nullptr;
   value = (int)strtol(strValue.c_str(), &end, 10);
-  if (end != nullptr && *end != '\0')
-    return false;
-
-  return true;
+  return !(end != nullptr && *end != '\0');
 }
 
 CSettingNumber::CSettingNumber(const std::string &id, CSettingsManager *settingsManager /* = nullptr */)
@@ -1086,11 +1083,8 @@ bool CSettingNumber::CheckValidity(const std::string &value) const
 bool CSettingNumber::CheckValidity(double value) const
 {
   CSharedLock lock(m_critical);
-  if (m_min != m_max &&
-     (value < m_min || value > m_max))
-    return false;
-
-  return true;
+  return !(m_min != m_max &&
+     (value < m_min || value > m_max));
 }
 
 bool CSettingNumber::SetValue(double value)
@@ -1151,10 +1145,7 @@ bool CSettingNumber::fromString(const std::string &strValue, double &value)
 
   char *end = nullptr;
   value = strtod(strValue.c_str(), &end);
-  if (end != nullptr && *end != '\0')
-    return false;
-
-  return true;
+  return !(end != nullptr && *end != '\0');
 }
 
 CSettingString::CSettingString(const std::string &id, CSettingsManager *settingsManager /* = nullptr */)

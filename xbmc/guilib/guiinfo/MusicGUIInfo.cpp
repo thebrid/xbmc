@@ -399,10 +399,7 @@ bool CMusicGUIInfo::GetLabel(std::string& value, const CFileItem *item, int cont
   ///////////////////////////////////////////////////////////////////////////////////////////////
   // MUSICPM_*
   ///////////////////////////////////////////////////////////////////////////////////////////////
-  if (GetPartyModeLabel(value, info))
-    return true;
-
-  return false;
+  return GetPartyModeLabel(value, info);
 }
 
 bool CMusicGUIInfo::GetPartyModeLabel(std::string& value, const CGUIInfo &info) const

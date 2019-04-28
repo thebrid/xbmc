@@ -164,10 +164,7 @@ bool CLinuxRendererGL::ValidateRenderer()
   int index = m_iYV12RenderBuffer;
   CPictureBuffer& buf = m_buffers[index];
 
-  if (!buf.fields[FIELD_FULL][0].id)
-    return false;
-
-  return true;
+  return buf.fields[FIELD_FULL][0].id != 0;
 }
 
 bool CLinuxRendererGL::ValidateRenderTarget()
@@ -268,10 +265,7 @@ bool CLinuxRendererGL::Configure(const VideoPicture &picture, float fps, unsigne
 
 bool CLinuxRendererGL::ConfigChanged(const VideoPicture &picture)
 {
-  if (picture.videoBuffer->GetFormat() != m_format)
-    return true;
-
-  return false;
+  return picture.videoBuffer->GetFormat() != m_format;
 }
 
 void CLinuxRendererGL::AddVideoPicture(const VideoPicture &picture, int index)
@@ -1990,10 +1984,7 @@ bool CLinuxRendererGL::UploadYV12Texture(int source)
   YuvImage* im = &buf.image;
 
   bool deinterlacing;
-  if (m_currentField == FIELD_FULL)
-    deinterlacing = false;
-  else
-    deinterlacing = true;
+  deinterlacing = m_currentField != FIELD_FULL;
 
   VerifyGLState();
 
@@ -2108,10 +2099,7 @@ bool CLinuxRendererGL::UploadNV12Texture(int source)
   YuvImage* im = &buf.image;
 
   bool deinterlacing;
-  if (m_currentField == FIELD_FULL)
-    deinterlacing = false;
-  else
-    deinterlacing = true;
+  deinterlacing = m_currentField != FIELD_FULL;
 
   VerifyGLState();
 
@@ -2347,10 +2335,7 @@ bool CLinuxRendererGL::UploadYUV422PackedTexture(int source)
   YuvImage* im = &buf.image;
 
   bool deinterlacing;
-  if (m_currentField == FIELD_FULL)
-    deinterlacing = false;
-  else
-    deinterlacing = true;
+  deinterlacing = m_currentField != FIELD_FULL;
 
   VerifyGLState();
 
@@ -2566,7 +2551,7 @@ void CLinuxRendererGL::SetTextureFilter(GLenum method)
 
 bool CLinuxRendererGL::Supports(ERENDERFEATURE feature)
 {
-  if (feature == RENDERFEATURE_STRETCH ||
+  return feature == RENDERFEATURE_STRETCH ||
       feature == RENDERFEATURE_NONLINSTRETCH ||
       feature == RENDERFEATURE_ZOOM ||
       feature == RENDERFEATURE_VERTICAL_SHIFT ||
@@ -2575,10 +2560,7 @@ bool CLinuxRendererGL::Supports(ERENDERFEATURE feature)
       feature == RENDERFEATURE_ROTATION ||
       feature == RENDERFEATURE_BRIGHTNESS ||
       feature == RENDERFEATURE_CONTRAST ||
-      feature == RENDERFEATURE_TONEMAP)
-    return true;
-
-  return false;
+      feature == RENDERFEATURE_TONEMAP;
 }
 
 bool CLinuxRendererGL::SupportsMultiPassRendering()

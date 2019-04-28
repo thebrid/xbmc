@@ -122,7 +122,7 @@ bool CGUIDialogSimpleMenu::ShowPlaySelection(CFileItem& item, const std::string&
       break;
     }
 
-    if (item_new->m_bIsFolder == false)
+    if (!item_new->m_bIsFolder)
     {
       std::string original_path = item.GetPath();
       item.Reset();

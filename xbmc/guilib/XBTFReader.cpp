@@ -161,10 +161,7 @@ bool CXBTFReader::Open(const std::string& path)
 
   // Sanity check
   uint64_t pos = static_cast<uint64_t>(ftell(m_file));
-  if (pos != GetHeaderSize())
-    return false;
-
-  return true;
+  return pos == GetHeaderSize();
 }
 
 bool CXBTFReader::IsOpen() const

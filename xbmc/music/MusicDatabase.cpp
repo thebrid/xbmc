@@ -1771,10 +1771,7 @@ bool CMusicDatabase::AddSongGenres(int idSong, const std::vector<std::string>& g
     // Update concatenated genre string from the standardised genre values
     std::string strGenres = StringUtils::Join(modgenres, CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_musicItemSeparator);
     strSQL = PrepareSQL("UPDATE song SET strGenres = '%s' WHERE idSong = %i", strGenres.c_str(), idSong);
-    if (!ExecuteQuery(strSQL))
-      return false;
-
-    return true;
+    return ExecuteQuery(strSQL);
   }
   catch (...)
   {

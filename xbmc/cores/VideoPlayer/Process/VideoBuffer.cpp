@@ -346,11 +346,8 @@ inline bool CVideoBufferPoolSysMem::IsConfigured()
 
 bool CVideoBufferPoolSysMem::IsCompatible(AVPixelFormat format, int size)
 {
-  if (m_pixFormat == format &&
-      m_size == size)
-    return true;
-
-  return false;
+  return m_pixFormat == format &&
+      m_size == size;
 }
 
 void CVideoBufferPoolSysMem::Discard(CVideoBufferManager *bm, ReadyToDispose cb)

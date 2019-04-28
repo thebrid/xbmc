@@ -26,10 +26,7 @@ bool CMusicLibraryCleaningJob::operator==(const CJob* job) const
     return false;
 
   const CMusicLibraryCleaningJob* cleaningJob = dynamic_cast<const CMusicLibraryCleaningJob*>(job);
-  if (cleaningJob == nullptr)
-    return false;
-
-  return true;
+  return cleaningJob != nullptr;
 }
 
 bool CMusicLibraryCleaningJob::Work(CMusicDatabase &db)

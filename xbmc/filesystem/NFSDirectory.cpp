@@ -68,7 +68,7 @@ bool CNFSDirectory::GetDirectoryFromExportList(const std::string& strPath, CFile
       items.Add(pItem);
   }
 
-  return exportList.empty()? false : true;
+  return !exportList.empty();
 }
 
 bool CNFSDirectory::GetServerList(CFileItemList &items)
@@ -350,5 +350,5 @@ bool CNFSDirectory::Exists(const CURL& url2)
   {
     return false;
   }
-  return S_ISDIR(info.st_mode) ? true : false;
+  return ;
 }

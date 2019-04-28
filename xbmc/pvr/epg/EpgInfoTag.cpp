@@ -677,10 +677,7 @@ bool CPVREpgInfoTag::IsPlayable(void) const
 
 bool CPVREpgInfoTag::IsSeries(void) const
 {
-  if ((m_iFlags & EPG_TAG_FLAG_IS_SERIES) > 0 || SeriesNumber() > 0 || EpisodeNumber() > 0 || EpisodePart() > 0)
-    return true;
-  else
-    return false;
+  return (m_iFlags & EPG_TAG_FLAG_IS_SERIES) > 0 || SeriesNumber() > 0 || EpisodeNumber() > 0 || EpisodePart() > 0;
 }
 
 bool CPVREpgInfoTag::IsRadio() const

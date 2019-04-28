@@ -22,18 +22,12 @@ CDVDInputStreamMemory::~CDVDInputStreamMemory()
 
 bool CDVDInputStreamMemory::IsEOF()
 {
-  if(m_iDataPos >= m_iDataSize)
-    return true;
-
-  return false;
+  return m_iDataPos >= m_iDataSize;
 }
 
 bool CDVDInputStreamMemory::Open()
 {
-  if (!CDVDInputStream::Open())
-    return false;
-
-  return true;
+  return CDVDInputStream::Open();
 }
 
 // close file and reset everything

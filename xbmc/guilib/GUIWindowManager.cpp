@@ -895,7 +895,7 @@ void CGUIWindowManager::OnApplicationMessage(ThreadMessage* pMsg)
   {
     CGUIWindow *window = static_cast<CGUIWindow *>(pMsg->lpVoid);
     if (window)
-      window->Close((pMsg->param1 & 0x1) ? true : false, pMsg->param1, (pMsg->param1 & 0x2) ? true : false);
+      window->Close((pMsg->param1 & 0x1) != 0, pMsg->param1, (pMsg->param1 & 0x2) != 0);
   }
   break;
 
@@ -1301,10 +1301,7 @@ bool CGUIWindowManager::ProcessRenderLoop(bool renderOnly)
     m_pCallback->Render();
     m_iNested--;
   }
-  if (g_application.m_bStop || !renderGui)
-    return false;
-  else
-    return true;
+  return !(g_application.m_bStop || !renderGui);
 }
 
 void CGUIWindowManager::SetCallback(IWindowManagerCallback& callback)
@@ -1629,17 +1626,13 @@ bool CGUIWindowManager::IsModalDialogTopmost(const std::string &xmlFile) const
 bool CGUIWindowManager::IsDialogTopmost(int id, bool modal /* = false */) const
 {
   CGUIWindow *topmost = GetWindow(GetTopmostDialog(modal, false));
-  if (topmost && (topmost->GetID() & WINDOW_ID_MASK) == id)
-    return true;
-  return false;
+  return topmost && (topmost->GetID() & WINDOW_ID_MASK) == id;
 }
 
 bool CGUIWindowManager::IsDialogTopmost(const std::string &xmlFile, bool modal /* = false */) const
 {
   CGUIWindow *topmost = GetWindow(GetTopmostDialog(modal, false));
-  if (topmost && StringUtils::EqualsNoCase(URIUtils::GetFileName(topmost->GetProperty("xmlfile").asString()), xmlFile))
-    return true;
-  return false;
+  return topmost && StringUtils::EqualsNoCase(URIUtils::GetFileName(topmost->GetProperty("xmlfile").asString()), xmlFile);
 }
 
 bool CGUIWindowManager::HasVisibleControls()

@@ -504,7 +504,7 @@ bool CPlayerGUIInfo::GetBool(bool& value, const CGUIListItem *gitem, int context
       }
       break;
     case PLAYER_HAS_PROGRAMS:
-      value = (g_application.GetAppPlayer().GetProgramsCount() > 1) ? true : false;
+      value = g_application.GetAppPlayer().GetProgramsCount() > 1;
       return true;
     case PLAYER_HAS_RESOLUTIONS:
       value = CServiceBroker::GetWinSystem()->GetGfxContext().IsFullScreenRoot() &&

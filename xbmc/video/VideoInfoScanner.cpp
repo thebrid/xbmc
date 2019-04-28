@@ -1125,7 +1125,7 @@ namespace VIDEO
       episode.cDate.SetValid(false);
       episode.isFolder = false;
 
-      bool byDate = expression[i].byDate ? true : false;
+      bool byDate = expression[i].byDate;
       int defaultSeason = expression[i].defaultSeason;
 
       if (byDate)

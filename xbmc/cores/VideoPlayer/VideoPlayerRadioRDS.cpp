@@ -514,10 +514,7 @@ CDVDRadioRDSData::~CDVDRadioRDSData()
 
 bool CDVDRadioRDSData::CheckStream(CDVDStreamInfo &hints)
 {
-  if (hints.type == STREAM_RADIO_RDS)
-    return true;
-
-  return false;
+  return hints.type == STREAM_RADIO_RDS;
 }
 
 bool CDVDRadioRDSData::OpenStream(CDVDStreamInfo hints)
@@ -746,7 +743,7 @@ void CDVDRadioRDSData::ProcessUECP(const unsigned char *data, unsigned int len)
     if (m_UECPDataStart)
     {
       //! byte-stuffing reverse: 0xfd00->0xfd, 0xfd01->0xfe, 0xfd02->0xff
-      if (m_UECPDatabStuff == true)
+      if (m_UECPDatabStuff)
       {
         switch (data[i])
         {
@@ -772,7 +769,7 @@ void CDVDRadioRDSData::ProcessUECP(const unsigned char *data, unsigned int len)
       }
     }
 
-    if (m_UECPDataStart == true && data[i] == UECP_DATA_STOP && m_currentInfoTag)     //!< End
+    if (m_UECPDataStart && data[i] == UECP_DATA_STOP && m_currentInfoTag)     //!< End
     {
       m_UECPDataStart = false;
 
@@ -1275,7 +1272,7 @@ unsigned int CDVDRadioRDSData::DecodeRTPlus(uint8_t *msgElement, unsigned int le
                 m_RTPlus_iTime.StartZero();
                 m_RTPlus_Artist[0] = 0;
               }
-              m_RT_NewItem = (!m_RT_NewItem) ? true : false;
+              m_RT_NewItem = !m_RT_NewItem;
               m_RTPlus_Show = m_RTPlus_TToggle = true;
             }
           }
@@ -1303,7 +1300,7 @@ unsigned int CDVDRadioRDSData::DecodeRTPlus(uint8_t *msgElement, unsigned int le
                 m_RTPlus_iTime.StartZero();
                 m_RTPlus_Title[0] = 0;
               }
-              m_RT_NewItem = (!m_RT_NewItem) ? true : false;
+              m_RT_NewItem = !m_RT_NewItem;
               m_RTPlus_Show = m_RTPlus_TToggle = true;
             }
           }
@@ -1553,7 +1550,7 @@ unsigned int CDVDRadioRDSData::DecodeEPPTransmitterInfo(uint8_t *msgElement)
         return 7;
     }
 
-    m_RDS_IsRBDS = countryName == "US" ? true : false;
+    m_RDS_IsRBDS = countryName == "US";
 
     m_currentInfoTag->SetCountry(countryName);
   }

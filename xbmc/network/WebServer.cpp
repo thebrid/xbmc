@@ -451,10 +451,7 @@ bool CWebServer::IsRequestCacheable(const HTTPRequest& request) const
 
   // handle Pragma
   std::string pragma = HTTPRequestHandlerUtils::GetRequestHeaderValue(request.connection, MHD_HEADER_KIND, MHD_HTTP_HEADER_PRAGMA);
-  if (pragma.compare(HEADER_VALUE_NO_CACHE) == 0)
-    return false;
-
-  return true;
+  return pragma.compare(HEADER_VALUE_NO_CACHE) != 0;
 }
 
 bool CWebServer::IsRequestRanged(const HTTPRequest& request, const CDateTime &lastModified) const

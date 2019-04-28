@@ -554,7 +554,7 @@ public:
   {
     waiting = true;
     AtomicGuard g(&g_mutex);
-    while ((result = event.WaitMSec(0)) == false);
+    while ((!(result = event.WaitMSec(0)));
     waiting = false;
   }
 };

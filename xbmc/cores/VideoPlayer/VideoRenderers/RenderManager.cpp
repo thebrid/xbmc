@@ -246,10 +246,7 @@ bool CRenderManager::Configure()
 bool CRenderManager::IsConfigured() const
 {
   CSingleLock lock(m_statelock);
-  if (m_renderState == STATE_CONFIGURED)
-    return true;
-  else
-    return false;
+  return m_renderState == STATE_CONFIGURED;
 }
 
 void CRenderManager::ShowVideo(bool enable)
@@ -273,10 +270,7 @@ bool CRenderManager::IsPresenting()
     return false;
 
   CSingleLock lock(m_presentlock);
-  if (!m_presentTimer.IsTimePast())
-    return true;
-  else
-    return false;
+  return !m_presentTimer.IsTimePast();
 }
 
 void CRenderManager::FrameMove()

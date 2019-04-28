@@ -154,10 +154,7 @@ namespace PVR
       if (timer && !URIUtils::PathEquals(item.GetPath(), CPVRTimersPath::PATH_ADDTIMER))
         return timer->GetEpgInfoTag().get() != nullptr;
 
-      if (item.GetPVRRecordingInfoTag())
-        return true;
-
-      return false;
+      return item.GetPVRRecordingInfoTag();
     }
 
     bool ShowInformation::Execute(const CFileItemPtr &item) const
@@ -342,10 +339,7 @@ namespace PVR
     bool UndeleteRecording::IsVisible(const CFileItem &item) const
     {
       const CPVRRecordingPtr recording(item.GetPVRRecordingInfoTag());
-      if (recording && recording->IsDeleted())
-        return true;
-
-      return false;
+      return recording && recording->IsDeleted();
     }
 
     bool UndeleteRecording::Execute(const CFileItemPtr &item) const
@@ -359,12 +353,9 @@ namespace PVR
     bool AddReminder::IsVisible(const CFileItem& item) const
     {
       const std::shared_ptr<CPVREpgInfoTag> epg = item.GetEPGInfoTag();
-      if (epg &&
+      return epg &&
           !CServiceBroker::GetPVRManager().Timers()->GetTimerForEpgTag(epg) &&
-          epg->StartAsLocalTime() > CDateTime::GetCurrentDateTime())
-        return true;
-
-      return false;
+          epg->StartAsLocalTime() > CDateTime::GetCurrentDateTime();
     }
 
     bool AddReminder::Execute(const std::shared_ptr<CFileItem>& item) const

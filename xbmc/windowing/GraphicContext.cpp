@@ -369,12 +369,7 @@ void CGraphicContext::SetCalibrating(bool bOnOff)
 
 bool CGraphicContext::IsValidResolution(RESOLUTION res)
 {
-  if (res >= RES_WINDOW && (size_t) res < CDisplaySettings::GetInstance().ResolutionInfoSize())
-  {
-    return true;
-  }
-
-  return false;
+  return res >= RES_WINDOW && (size_t) res < CDisplaySettings::GetInstance().ResolutionInfoSize();
 }
 
 // call SetVideoResolutionInternal and ensure its done from mainthread

@@ -72,9 +72,7 @@ bool CColorManager::IsValid() const
   case CMS_MODE_PROFILE:
   {
     int cmslutsize = settings->GetInt("videoscreen.cmslutsize");
-    if (cmslutsize <= 0)
-      return false;
-    return true;
+    return cmslutsize > 0;
   }
 #endif
   default:

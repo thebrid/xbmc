@@ -43,7 +43,7 @@ template<>
 void CDBusMessage::AppendArgument<bool>(const bool arg)
 {
   // dbus_bool_t width might not match C++ bool width
-  dbus_bool_t convArg = (arg == true);
+  dbus_bool_t convArg = (arg);
   AppendWithType(DBUS_TYPE_BOOLEAN, &convArg);
 }
 

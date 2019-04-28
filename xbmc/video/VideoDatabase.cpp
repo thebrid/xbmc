@@ -9123,7 +9123,7 @@ std::vector<int> CVideoDatabase::CleanMediaType(const std::string &mediaType, co
   while (!m_pDS2->eof())
   {
     bool del = true;
-    if (m_pDS2->fv(3).get_isNull() == false)
+    if (!m_pDS2->fv(3).get_isNull())
     {
       std::string parentPath = m_pDS2->fv(3).get_asString();
 

@@ -102,12 +102,7 @@ bool CTextureBundleXBT::OpenBundle()
 
   m_TimeStamp = m_XBTFReader->GetLastModificationTimestamp();
 
-  if (lzo_init() != LZO_E_OK)
-  {
-    return false;
-  }
-
-  return true;
+  return lzo_init() == LZO_E_OK;
 }
 
 bool CTextureBundleXBT::HasFile(const std::string& Filename)

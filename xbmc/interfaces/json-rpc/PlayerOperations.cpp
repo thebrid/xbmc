@@ -1013,12 +1013,12 @@ JSONRPC_STATUS CPlayerOperations::SetPartymode(const std::string &method, ITrans
         if (g_partyModeManager.GetType() != context)
           return InvalidParams;
 
-        if (toggle || parameterObject["partymode"].asBoolean() == false)
+        if (toggle || !parameterObject["partymode"].asBoolean())
           change = true;
       }
       else
       {
-        if (toggle || parameterObject["partymode"].asBoolean() == true)
+        if (toggle || parameterObject["partymode"].asBoolean())
           change = true;
       }
 

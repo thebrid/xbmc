@@ -291,7 +291,7 @@ bool CGUITextBox::OnMessage(CGUIMessage& message)
 
     if (message.GetMessage() == GUI_MSG_SET_TYPE)
     {
-      UseMonoFont(message.GetParam1() == 1 ? true : false);
+      UseMonoFont(message.GetParam1() == 1);
       return true;
     }
   }

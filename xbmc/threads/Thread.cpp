@@ -87,7 +87,7 @@ void CThread::Create(bool bAutoDelete, unsigned stacksize)
 
 bool CThread::IsRunning() const
 {
-  return m_ThreadId ? true : false;
+  return m_ThreadId != 0;
 }
 
 THREADFUNC CThread::staticThread(void* data)

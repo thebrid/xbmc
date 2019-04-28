@@ -111,11 +111,8 @@ bool CRendererVAAPI::Configure(const VideoPicture &picture, float fps, unsigned 
 bool CRendererVAAPI::ConfigChanged(const VideoPicture &picture)
 {
   CVaapiRenderPicture *pic = dynamic_cast<CVaapiRenderPicture*>(picture.videoBuffer);
-  if ((pic->procPic.videoSurface != VA_INVALID_ID && !m_isVAAPIBuffer) ||
-      (pic->procPic.videoSurface == VA_INVALID_ID && m_isVAAPIBuffer))
-    return true;
-
-  return false;
+  return (pic->procPic.videoSurface != VA_INVALID_ID && !m_isVAAPIBuffer) ||
+      (pic->procPic.videoSurface == VA_INVALID_ID && m_isVAAPIBuffer);
 }
 
 bool CRendererVAAPI::Supports(ERENDERFEATURE feature)

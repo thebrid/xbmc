@@ -80,10 +80,7 @@ bool in_ether (const char *bufp, unsigned char *addr)
       bufp++;
   }
 
-  if (bufp - orig != 17)
-    return false;
-
-  return true;
+  return bufp - orig == 17;
 }
 
 int NetworkAccessPoint::getQuality() const

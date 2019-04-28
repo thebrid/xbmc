@@ -245,8 +245,5 @@ bool CHTTPDirectory::Exists(const CURL &url)
     return false;
   }
 
-  if (buffer.st_mode == _S_IFDIR)
-	  return true;
-
-  return false;
+  return buffer.st_mode == _S_IFDIR;
 }

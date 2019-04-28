@@ -112,9 +112,7 @@ bool CMusicDatabaseDirectory::IsAllItem(const std::string& strDirectory)
 {
   //Last query parameter, ignoring any appended options, is -1
   CURL url(strDirectory);
-  if (StringUtils::EndsWith(url.GetWithoutOptions(), "/-1/"))
-    return true;
-  return false;
+  return StringUtils::EndsWith(url.GetWithoutOptions(), "/-1/");
 }
 
 bool CMusicDatabaseDirectory::GetLabel(const std::string& strDirectory, std::string& strLabel)

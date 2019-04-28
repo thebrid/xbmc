@@ -202,5 +202,5 @@ bool CPosixDirectory::Exists(const CURL& url)
   struct stat buffer;
   if (stat(path.c_str(), &buffer) != 0)
     return false;
-  return S_ISDIR(buffer.st_mode) ? true : false;
+  return ;
 }

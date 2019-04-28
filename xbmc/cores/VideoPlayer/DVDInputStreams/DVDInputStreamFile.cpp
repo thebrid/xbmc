@@ -150,10 +150,7 @@ int64_t CDVDInputStreamFile::GetLength()
 
 bool CDVDInputStreamFile::GetCacheStatus(XFILE::SCacheStatus *status)
 {
-  if(m_pFile && m_pFile->IoControl(IOCTRL_CACHE_STATUS, status) >= 0)
-    return true;
-  else
-    return false;
+  return m_pFile && m_pFile->IoControl(IOCTRL_CACHE_STATUS, status) >= 0;
 }
 
 BitstreamStats CDVDInputStreamFile::GetBitstreamStats() const

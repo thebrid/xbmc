@@ -211,19 +211,13 @@ std::string field_value::get_asString() const {
 bool field_value::get_asBool() const {
     switch (field_type) {
     case ft_String: {
-      if (str_value == "True" || str_value == "true" || str_value == "1")
-          return true;
-      else
-	return false;
+      return str_value == "True" || str_value == "true" || str_value == "1";
     }
     case ft_Boolean:{
       return bool_value;
       }
     case ft_Char: {
-      if (char_value == 'T' || char_value == 't')
-	return true;
-      else
-	return false;
+      return char_value == 'T' || char_value == 't';
     }
     case ft_Short: {
       return (bool)short_value;

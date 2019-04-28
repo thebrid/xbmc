@@ -152,11 +152,8 @@ bool CFileUtils::RemoteAccessAllowed(const std::string &strPath)
   g_mediaManager.GetRemovableDrives(sources);   // Sources returned allways have m_allowsharing = true
   //! @todo Make sharing of auto-mounted sources user configurable
   int sourceIndex = CUtil::GetMatchingSource(realPath, sources, isSource);
-  if (sourceIndex >= 0 && sourceIndex < static_cast<int>(sources.size()) && 
-      sources.at(sourceIndex).m_iHasLock != 2 && sources.at(sourceIndex).m_allowSharing)
-    return true;
-
-  return false;
+  return sourceIndex >= 0 && sourceIndex < static_cast<int>(sources.size()) && 
+      sources.at(sourceIndex).m_iHasLock != 2 && sources.at(sourceIndex).m_allowSharing;
 }
 
 CDateTime CFileUtils::GetModificationDate(const std::string& strFileNameAndPath, const bool& bUseLatestDate)

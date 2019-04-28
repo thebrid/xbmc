@@ -285,7 +285,7 @@ bool CPeripheralCecAdapter::OpenConnection(void)
 
   while (!m_bStop && !bIsOpen)
   {
-    if ((bIsOpen = m_cecAdapter->Open(m_strComPort.c_str(), 10000)) == false)
+    if ((!(bIsOpen = m_cecAdapter->Open(m_strComPort.c_str(), 10000)))
     {
       // display warning: couldn't initialise libCEC
       CLog::Log(LOGERROR, "%s - could not opening a connection to the CEC adapter", __FUNCTION__);
@@ -1621,7 +1621,7 @@ void CPeripheralCecAdapterUpdateThread::Process(void)
 
       {
         CSingleLock lock(m_critSection);
-        if ((bUpdate = m_bNextConfigurationScheduled) == true)
+        if ((bUpdate = m_bNextConfigurationScheduled)
         {
           // another update is scheduled
           m_bNextConfigurationScheduled = false;

@@ -228,9 +228,7 @@ int64_t CZipFile::Seek(int64_t iFilePosition, int iWhence)
 bool CZipFile::Exists(const CURL& url)
 {
   SZipEntry item;
-  if (g_ZipManager.GetZipEntry(url,item))
-    return true;
-  return false;
+  return g_ZipManager.GetZipEntry(url,item);
 }
 
 int CZipFile::Stat(struct __stat64 *buffer)
@@ -300,7 +298,7 @@ ssize_t CZipFile::Read(void* lpBuf, size_t uiBufSize)
       if (m_bFlush) // need to flush buffer !
       {
         int iMessage = inflate(&m_ZStream,Z_SYNC_FLUSH);
-        m_bFlush = ((iMessage == Z_OK) && (m_ZStream.avail_out == 0))?true:false;
+        m_bFlush = (iMessage == Z_OK) && (m_ZStream.avail_out == 0);
         if (!m_ZStream.avail_out) // flush filled buffer, get out of here
         {
           iDecompressed = m_ZStream.total_out-prevOut;
@@ -324,7 +322,7 @@ ssize_t CZipFile::Read(void* lpBuf, size_t uiBufSize)
         return -1; // READ ERROR
       }
 
-      m_bFlush = ((iMessage == Z_OK) && (m_ZStream.avail_out == 0))?true:false; // more info in input buffer
+      m_bFlush = (iMessage == Z_OK) && (m_ZStream.avail_out == 0); // more info in input buffer
 
       iDecompressed = m_ZStream.total_out-prevOut;
     }

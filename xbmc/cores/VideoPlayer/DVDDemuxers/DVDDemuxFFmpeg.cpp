@@ -192,10 +192,7 @@ bool CDVDDemuxFFmpeg::Aborted()
     return true;
 
   std::shared_ptr<CDVDInputStreamFFmpeg> input = std::dynamic_pointer_cast<CDVDInputStreamFFmpeg>(m_pInput);
-  if(input && input->Aborted())
-    return true;
-
-  return false;
+  return input && input->Aborted();
 }
 
 bool CDVDDemuxFFmpeg::Open(std::shared_ptr<CDVDInputStream> pInput, bool streaminfo, bool fileinfo)
@@ -1177,10 +1174,7 @@ bool CDVDDemuxFFmpeg::SeekTime(double time, bool backwards, double *startpts)
 
   if (ret >= 0)
   {
-    if (!hitEnd)
-      return true;
-    else
-      return false;
+    return !hitEnd;
   }
   else
     return false;

@@ -2444,7 +2444,7 @@ int CTeletextDecoder::RenderChar(UTILS::Color *buffer,    // pointer to render b
     Attribute->bg = t;
   }
   fgcolor = GetColorRGB((enumTeletextColor)Attribute->fg);
-  if (transpmode == true && PosY < 24*FontHeight)
+  if (transpmode && PosY < 24*FontHeight)
   {
     bgcolor = GetColorRGB(TXT_ColorTransp);
   }
@@ -2752,10 +2752,7 @@ TextPageinfo_t* CTeletextDecoder::DecodePage(bool showl25,             // 1=deco
 
   bool boxed;
   /* check for newsflash & subtitle */
-  if (PageInfo->boxed && IsDec(m_txtCache->Page))
-    boxed = true;
-  else
-    boxed = false;
+  boxed = PageInfo->boxed && IsDec(m_txtCache->Page);
 
 
   /* modify header */

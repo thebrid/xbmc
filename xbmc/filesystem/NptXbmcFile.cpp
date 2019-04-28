@@ -301,7 +301,7 @@ NPT_XbmcFile::Open(NPT_File::OpenMode mode)
 
         // compute mode
         if (mode & NPT_FILE_OPEN_MODE_WRITE) {
-            result = file->OpenForWrite(*url, (mode & NPT_FILE_OPEN_MODE_TRUNCATE)?true:false);
+            result = file->OpenForWrite(*url, (mode & NPT_FILE_OPEN_MODE_TRUNCATE) != 0);
         } else {
             result = file->Open(*url);
         }

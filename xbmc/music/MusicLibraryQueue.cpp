@@ -151,10 +151,7 @@ bool CMusicLibraryQueue::IsScanningLibrary() const
 
   // check if the library is being cleaned asynchronously
   MusicLibraryJobMap::const_iterator cleaningJobs = m_jobs.find("MusicLibraryCleaningJob");
-  if (cleaningJobs != m_jobs.end() && !cleaningJobs->second.empty())
-    return true;
-
-  return false;
+  return cleaningJobs != m_jobs.end() && !cleaningJobs->second.empty();
 }
 
 void CMusicLibraryQueue::StopLibraryScanning()
